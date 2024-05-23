@@ -1,7 +1,8 @@
-const Button = ({btnName, handleClick, classStyle}) => {
-  <button className={Style.button} type="button" onclick={handleClick}>
+import Style from './Button.module.css'
+const Button = ({btnName, handleClick, classStyles}) => (
+  <button className={Style.button} type="button" onClick={handleClick}>
     {btnName}
   </button>
-};
+);
 
 export default Button;

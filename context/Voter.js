@@ -71,7 +71,7 @@ const fetchContract=(signerOrProvider) =>
 
     //Upload to ipfs voter image
 
-      const uploadIPFS=async(file)=>{
+      const uploadToIPFS=async(file)=>{
         try{
           const added=await client.add({content:file});
 
@@ -90,7 +90,7 @@ const fetchContract=(signerOrProvider) =>
         VotingTitle,
         checkIfWalletIsConnected,
         connectWallet,
-        uploadIPFS,
+        uploadToIPFS,
         }}
         >
       {children}

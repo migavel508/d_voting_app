@@ -25,14 +25,14 @@ const allowedVoters=()=>{
     position:"",
   });
   const router =useRouter();
-  const {uploadToIPFS}=useContext(VotingContext);
+  const { uploadToIPFS }=useContext(VotingContext);
 
 
   //voter image drop 
 
   const onDrop=useCallback(async(acceptedFil)=>{
     const url=await uploadToIPFS(acceptedFil[0]);
-    setFileUrl(url)
+    setFileUrl(url);
   });
 
   const { getRootProps,getInputProps }=useDropzone({
@@ -40,6 +40,10 @@ const allowedVoters=()=>{
     accept:"image/*",
     maxSize:5000000,
   });
+
+
+console.log(fileUrl)
+
 //---JSX PART
   return (
     <div className={Style.createVoter}>
@@ -75,8 +79,8 @@ const allowedVoters=()=>{
                 </p>
                 <p className={Style.sideInfo_para}>Contract Candidate</p>
 
-                <div className={Style.car}>
-                  {/*voterArray.map((el,li)=>(
+                <div className={Style.card}>
+                  {/*{voterArray.map((el,li)=>(
                     <div key={i+1} className={Style.card_box}>
                       <div className={Style.image}>
                         <img src="" alt="Profile Photo"/>
@@ -88,7 +92,7 @@ const allowedVoters=()=>{
                         <p>Details</p>
                       </div>
                     </div>
-                  ))*/}
+                  ))}?*/}
                 </div>
 
               </div>
@@ -104,13 +108,79 @@ const allowedVoters=()=>{
           <h1>Create New</h1>
           <div className={Style.voter_container_box}>
             <div className={Style.voter_container_box_div}>
-              <div {...getRootProps}></div>
+              <div {...getRootProps()}>
+                <input {...getInputProps()}/>
+
+                <div className={Style.voter_container_box_div_info}>
+                  <p>Upload File: JPG, PNG, GIF, WEBM Max 10MB</p>
+
+                  <div className={Style.voter_container_box_div_image}>
+                    <Image src={images.upload} width={150} height={150} objectFit="contain" alt="File Upload"
+                    />
+                  </div>
+                  <p>Drag & Drop</p>
+                  <p>or Browse Media on your device</p>
+
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
+
+        <div className={Style.input_container}>
+          
+              <Input 
+            inputType="text" 
+            title="Name" 
+            placeholder="Voter Name"
+            handleClick={(e)=> 
+              setFormInput({...formInput,name:e.target.value })
+              }
+              />
+              <Input 
+            inputType="text" 
+            title="Address" 
+            placeholder="Voter Address"
+            handleClick={(e)=> 
+              setFormInput({...formInput,address:e.target.value })
+              }
+              />
+              <Input 
+            inputType="text" 
+            title="Position" 
+            placeholder="Voter Position"
+            handleClick={(e)=> 
+              setFormInput({...formInput,position:e.target.value })
+              }
+              />
+              
+
+
+              <div className={Style.Button}>
+                <Button btnName="Authorized Voter" handleClick={()=>{}}/>
+
+              </div>
+        </div>
+      </div>
+
+
+      {/* //////////////*/}
+      <div className={Style.createdVoter}>
+        <div className={Style.createdVoter_info}>
+          <Image src={images.creator} alt="user Profile" />
+          <p>Notice for users</p>
+          <p>
+            Organizer<span> 0x9399999...</span>
+          </p>
+          <p>
+            Only organizer of the voting contract can create voter for
+             voting election
+          </p>
+        </div>
       </div>
     </div>
-  )
+  );
 
 };
 
