@@ -182,6 +182,7 @@ console.log(fileUrl)
     </div>
   );
 
+  
 };
 
 export default allowedVoters;
